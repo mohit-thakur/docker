@@ -1,0 +1,13 @@
+web:
+    image: wordpress
+    links:
+     - mysql
+    environment:
+     - WORDPRESS_DB_PASSWORD=p0lo9ki8
+    ports:
+     - 8080:80
+mysql:
+    image: mysql:latest
+    environment:
+     - MYSQL_ROOT_PASSWORD=p0lo9ki8
+     - MYSQL_DATABASE=wordpress
