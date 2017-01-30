@@ -1,5 +1,6 @@
-FROM xmlangel/base-ubuntu14.04
-EXPOSE 80
-COPY file /root
-RUN apt-get update && apt-get install -y apache2
-CMD /usr/sbin/apache2ctl -D FOREGROUND
+from xmlangel/base-ubuntu14.04
+RUN apt-get update && apt-get install -y openssh-server apache2 supervisor
+RUN mkdir -p /var/lock/apache2 /var/run/apache2 /var/run/sshd /var/log/supervisor
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+EXPOSE 22 80
+CMD ["/usr/bin/supervisord"]
